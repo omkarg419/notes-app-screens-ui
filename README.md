@@ -5,6 +5,7 @@ This repository contains a small Expo React Native project implementing a two-sc
 ---
 ## Demo
 
+- [Demo Video](https://drive.google.com/file/d/1_nY9ylymG0C-goSO5Nqwb8MSKdgdjxIM/view?usp=sharing)
 ---
 
 ## Project structure (important files)
