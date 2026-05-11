@@ -1,56 +1,73 @@
-# Welcome to your Expo app 👋
+# Notes App UI
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This repository contains a small Expo React Native project implementing a two-screen Notes UI (no external navigation requirements). It demonstrates list and editor screens, theme toggling, responsive layout, and keyboard-safe editing.
 
-## Get started
+---
+## Demo
+
+---
+
+## Project structure (important files)
+
+- `src/app/index.tsx` — Notes list screen (home). Shows `FlatList` of notes, search `TextInput`, theme & focus `Switch`, and New note button.
+- `src/app/editor.tsx` — Editor screen (route `/editor`). Uses `KeyboardAvoidingView`, `ImageBackground`, `TextInput` for title and multiline body, Back and Save `Pressable` buttons.
+- `src/app/notes-store.tsx` — Minimal shared in-memory notes store (React Context) used by both screens.
+- `src/app/_layout.tsx` — Expo Router layout wrapping the app in `NotesProvider`.
+
+---
+
+## Components & Hooks used
+
+- React Native components: `FlatList`, `Pressable`, `Text`, `TextInput`, `Switch`, `ImageBackground`, `KeyboardAvoidingView`, `SafeAreaView`, `ScrollView`, `View`.
+- React hooks: `useState`, `useEffect`, `useMemo`.
+- Platform & layout hooks: `useColorScheme`, `useWindowDimensions`.
+- Expo Router: `router`, `useLocalSearchParams` for route navigation and receiving note `id`.
+- Styling: `StyleSheet.create()` and theme-specific style objects composed at runtime.
+
+---
+
+## Key behavior and features
+
+- Notes Listing (home):
+  - `FlatList` renders note cards with title, body preview, and timestamp.
+  - Search `TextInput` filters notes by title or body.
+  - `Pressable` cards open the Editor screen for the selected note.
+  - `Switch` toggles: Theme (dark/light) and Focus mode (hides long preview content).
+  - Responsive: switches to two-column layout on wide screens (via `useWindowDimensions`).
+
+- Note Editor (`/editor`):
+  - `KeyboardAvoidingView` keeps inputs visible when the keyboard is open.
+  - `TextInput` for `title` and multiline `TextInput` for `body`.
+  - `ImageBackground` in the header area for visual polish.
+  - Back and Save `Pressable` buttons: Save upserts the note back to the shared store and navigates back.
+
+---
+
+## UI improvements added (beyond the brief)
+
+- Split the app into two explicit routes for clearer separation of concerns.
+- Created a shared `NotesProvider` to keep state in-memory across routes.
+- Improved spacing, card layout, and subtle shadows for a more polished look.
+- Added small icon markers inside primary action buttons for clarity.
+
+---
+
+## How to run locally
 
 1. Install dependencies
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Start the Expo dev server
 
-### Other setup steps
+```bash
+npx expo start
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Open the app in an emulator or on a device via Expo Go / development build and follow the demo steps above.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
